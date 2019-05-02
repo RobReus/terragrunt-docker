@@ -3,7 +3,7 @@ RUN go get github.com/gruntwork-io/terragrunt
 RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' github.com/gruntwork-io/terragrunt
 
 FROM hashicorp/terraform:light
-RUN apk add libc6-compat
+RUN apk add libc6-compat jq
 COPY --from=terragrunt /go/bin/terragrunt /bin
 ADD https://storage.googleapis.com/kubernetes-helm/helm-v2.13.1-linux-amd64.tar.gz /
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kubectl /bin/
